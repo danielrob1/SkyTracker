@@ -1,0 +1,26 @@
+# Secrets and local config
+.env
+*.token
+*.pem
+
+# Data
+data/
+*.json
+*.csv
+*.parquet
+*.delta
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Databricks exports
+*.dbc
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
