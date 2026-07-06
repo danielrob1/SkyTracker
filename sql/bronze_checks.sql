@@ -117,7 +117,7 @@ ORDER BY source_date DESC;
 
 
 -- ============================================================
--- 11. Archivos más recientes ingeridos en Bronze
+-- 9. Archivos más recientes ingeridos en Bronze
 -- ============================================================
 
 SELECT
