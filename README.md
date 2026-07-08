@@ -274,4 +274,38 @@ Las credenciales se gestionan mediante Databricks Secrets.
 
 ---
 
+## Visualizaciones del proyecto
+
+A continuación se muestran algunas visualizaciones generadas en Databricks a partir de las tablas Gold. Estas gráficas permiten explotar los datos procesados por el pipeline y obtener una visión analítica del tráfico aéreo capturado desde OpenSky Network.
+
+### Top países por aviones únicos detectados
+
+Esta visualización muestra los países de origen con mayor número de aviones únicos detectados en los snapshots procesados. Permite identificar rápidamente qué países tienen mayor presencia en los datos capturados.
+
+![Top países por aviones únicos detectados](assets/comparativa_paises.png)
+
+---
+
+### Países con mayor velocidad media
+
+Esta gráfica compara la velocidad media de los aviones agrupados por país de origen. Es útil para analizar diferencias de comportamiento entre los registros asociados a cada país.
+
+![Países con mayor velocidad media](assets/comparativa_velocidad.png)
+
+---
+
+### Distribución global de altitud
+
+Esta visualización agrupa los registros por bandas de altitud, permitiendo observar en qué rangos vuelan principalmente los aviones detectados.
+
+![Distribución global de altitud](assets/distribucion_altitud.png)
+
+---
+
+### Última posición conocida de cada avión
+
+Esta tabla muestra el último estado registrado para cada avión, incluyendo identificador ICAO24, callsign, país de origen, coordenadas, altitud, velocidad y estado de vuelo.
+
+![Última posición conocida de cada avión](assets/ultimo_estado.png)
+
 
