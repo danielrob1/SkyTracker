@@ -141,23 +141,24 @@ LIMIT 10;
 
 -- MAGIC %md
 -- MAGIC ## 6. Top países por aviones únicos detectados
--- MAGIC
--- MAGIC Buena consulta para gráfico de barras por país de origen.
 
 -- COMMAND ----------
 
 SELECT
-  origin_country,
+  CASE
+    WHEN origin_country IS NULL OR TRIM(origin_country) = '' THEN 'Unknown'
+    ELSE origin_country
+  END AS origin_country,
   SUM(total_records) AS total_records,
   SUM(unique_aircraft) AS total_unique_aircraft_observations,
   ROUND(AVG(avg_velocity_kmh), 2) AS avg_velocity_kmh,
-  ROUND(AVG(avg_baro_altitude_m), 2) AS avg_baro_altitude_m,
-  SUM(records_on_ground) AS records_on_ground,
-  SUM(records_in_air) AS records_in_air,
-  MIN(first_seen) AS first_seen,
-  MAX(last_seen) AS last_seen
-FROM air_traffic_by_country
-GROUP BY origin_country
+  ROUND(AVG(avg_baro_altitude_m), 2) AS avg_baro_altitude_m
+FROM opensky_lakehouse.gold.air_traffic_by_country
+GROUP BY
+  CASE
+    WHEN origin_country IS NULL OR TRIM(origin_country) = '' THEN 'Unknown'
+    ELSE origin_country
+  END
 ORDER BY total_unique_aircraft_observations DESC
 LIMIT 20;
 
