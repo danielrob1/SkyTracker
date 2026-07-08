@@ -1,0 +1,65 @@
+resources:
+  jobs:
+    SkyTracker_Pipeline:
+      name: SkyTracker Pipeline
+      tasks:
+        - task_key: ingest_opensky_war
+          notebook_task:
+            notebook_path: /Workspace/Users/danielvictini@gmail.com/opensky-flight-lakehouse/SkyTracker/databricks/01_ingest_opensky_raw
+            source: WORKSPACE
+        - task_key: bronze_from_raw_json
+          depends_on:
+            - task_key: ingest_opensky_war
+          notebook_task:
+            notebook_path: /Workspace/Users/danielvictini@gmail.com/opensky-flight-lakehouse/SkyTracker/databricks/02_bronze_raw
+            source: WORKSPACE
+        - task_key: bronze_checks
+          depends_on:
+            - task_key: bronze_from_raw_json
+          sql_task:
+            file:
+              path: /Workspace/Users/danielvictini@gmail.com/opensky-flight-lakehouse/SkyTracker/sql/bronze_checks.sql
+              source: WORKSPACE
+            warehouse_id: c189c63402b6e7d1
+        - task_key: silver_flight_states
+          depends_on:
+            - task_key: bronze_checks
+          notebook_task:
+            notebook_path: /Workspace/Users/danielvictini@gmail.com/opensky-flight-lakehouse/SkyTracker/databricks/03_silver_flight_states
+            source: WORKSPACE
+        - task_key: silver_checks
+          depends_on:
+            - task_key: silver_flight_states
+          sql_task:
+            file:
+              path: /Workspace/Users/danielvictini@gmail.com/opensky-flight-lakehouse/SkyTracker/sql/silver_checks.sql
+              source: WORKSPACE
+            warehouse_id: c189c63402b6e7d1
+        - task_key: gold_analytics
+          depends_on:
+            - task_key: silver_checks
+          notebook_task:
+            notebook_path: /Workspace/Users/danielvictini@gmail.com/opensky-flight-lakehouse/SkyTracker/databricks/04_gold_analytics
+            source: WORKSPACE
+        - task_key: gold_checks
+          depends_on:
+            - task_key: gold_analytics
+          sql_task:
+            file:
+              path: /Workspace/Users/danielvictini@gmail.com/opensky-flight-lakehouse/SkyTracker/sql/gold_checks.sql
+              source: WORKSPACE
+            warehouse_id: c189c63402b6e7d1
+        - task_key: sql_queries
+          depends_on:
+            - task_key: gold_checks
+          notebook_task:
+            notebook_path: /Workspace/Users/danielvictini@gmail.com/opensky-flight-lakehouse/SkyTracker/databricks/05_sql_queries
+            source: WORKSPACE
+          environment_key: Default
+      queue:
+        enabled: true
+      environments:
+        - environment_key: Default
+          spec:
+            environment_version: "5"
+      performance_target: PERFORMANCE_OPTIMIZED
