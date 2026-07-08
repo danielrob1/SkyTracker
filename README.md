@@ -4,7 +4,7 @@ Proyecto de **Data Engineering** basado en la API de **OpenSky Network** y desar
 
 El objetivo principal es construir un pipeline completo de datos sobre tráfico aéreo, desde la ingesta de datos crudos hasta la creación de tablas analíticas listas para consulta y visualización.
 
-Este proyecto está diseñado con enfoque de portfolio, priorizando una arquitectura clara, buenas prácticas de ingeniería de datos, trazabilidad, calidad de datos y documentación.
+Este proyecto está diseñado con enfoque de portfolio, priorizando una arquitectura Medallion, buenas prácticas de ingeniería de datos, trazabilidad, calidad de datos y documentación.
 
 ---
 
