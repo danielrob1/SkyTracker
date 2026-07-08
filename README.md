@@ -128,18 +128,19 @@ SkyTracker/
 ├── sql/
 │   ├──  bronze_checks.sql
 │   ├──  silver_checks.sql
-│   ├──  gold_checks.sql
+│   └──  gold_checks.sql
+│
 ├── docs/
 │   ├── architecture.md
 │   ├── data_model.md
-│   ├── pipeline.md
+│   └── pipeline.md
 │
 └── assets/
-│   ├──  comparativa_paises.png
-│   ├──  comparativa_velocidad.png
-│   ├──  distribucion_altitud.png
-│   ├──  ultimo_estado.png
-│   ├──  workflow.png
+    ├──  comparativa_paises.png
+    ├──  comparativa_velocidad.png
+    ├──  distribucion_altitud.png
+    ├──  ultimo_estado.png
+    └──  workflow.png
 ```
 
 ---
