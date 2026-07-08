@@ -57,7 +57,7 @@ Se utiliza para:
 - procesar datos con Spark;
 - ejecutar SQL;
 - crear potenciales dashboards;
-- programar workflows en una fase posterior.
+- programar workflows para la ejecución automática.
 
 ---
 
@@ -336,19 +336,6 @@ Delta Lake se utiliza para:
 
 ## Consideraciones de escalabilidad
 
-Aunque la primera versión se ejecuta manualmente desde notebooks, la arquitectura permite evolucionar hacia:
-
-- ejecución programada con Databricks Workflows;
-- ingesta incremental;
-- Auto Loader;
-- Kafka;
-- Structured Streaming;
-- dashboards recurrentes;
-- checks automatizados de calidad.
-
----
-
-## Arquitectura futura con Kafka
 
 Kafka se integrará como capa intermedia cuando el pipeline base esté terminado.
 

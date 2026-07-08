@@ -217,34 +217,47 @@ Objetivo:
 - validar resultados analíticos.
 
 ---
+## Ejecución con Databricks Workflows
 
-## Ejecución manual inicial
+Además de la ejecución manual notebook por notebook, el proyecto incluye una ejecución automatizada mediante **Databricks Workflows**.
 
-Mientras el proyecto está en desarrollo, la ejecución será manual:
+El workflow ejecuta el pipeline completo en el siguiente orden:
 
 ```text
-1. Ejecutar 00_setup_lakehouse
-2. Ejecutar 01_ingest_opensky_raw
-3. Ejecutar 02_bronze_from_raw_json
-4. Ejecutar bronze_checks.sql
-5. Ejecutar 03_silver_flight_states
-6. Ejecutar 04_gold_analytics
-7. Ejecutar 05_sql_queries
+01_ingest_opensky_raw
+        ↓
+02_bronze_from_raw_json
+        ↓
+bronze_checks
+        ↓
+03_silver_flight_states
+        ↓
+silver_checks
+        ↓
+04_gold_analytics
+        ↓
+gold_checks
+        ↓
+05_sql_queries
 ```
 
 ---
 
-## Ejecución futura con Workflows
+## Tareas del Workflow
 
-En una fase posterior se podrá crear un Databricks Workflow:
+| Task | Descripción |
+|---|---|
+| `01_ingest_opensky_raw` | Consulta la API de OpenSky y guarda JSON raw en el Volume |
+| `02_bronze_from_raw_json` | Carga los JSON raw en una tabla Delta Bronze |
+| `bronze_checks` | Ejecuta validaciones de calidad sobre Bronze |
+| `03_silver_flight_states` | Normaliza los datos a una fila por avión |
+| `silver_checks` | Valida coordenadas, duplicados, timestamps y trazabilidad |
+| `04_gold_analytics` | Crea tablas agregadas para análisis |
+| `gold_checks` | Valida las tablas Gold y sus métricas |
+| `05_sql_queries` | Ejecuta consultas analíticas sobre la capa Gold |
 
-```text
-Task 1: Ingest OpenSky Raw
-Task 2: Bronze Load
-Task 3: Bronze Checks
-Task 4: Silver Transform
-Task 5: Gold Aggregations
-Task 6: SQL Validation
-```
+---
+
+
 
 
