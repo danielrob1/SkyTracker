@@ -118,28 +118,28 @@ SkyTracker/
 ├── .gitignore
 │
 ├── databricks/
-│   ├── 00_setup_lakehouse.sql
-│   ├── 01_ingest_opensky_raw.py
-│   ├── 02_bronze_from_raw_json.py
-│   ├── 03_silver_flight_states.py
-│   ├── 04_gold_analytics.py
-│   └── 05_sql_queries.sql
+│   ├── 00_setup_lakehouse.ipynb
+│   ├── 01_ingest_opensky_raw.ipynb
+│   ├── 02_bronze_from_raw_json.ipynb
+│   ├── 03_silver_flight_states.ipynb
+│   ├── 04_gold_analytics.ipynb
+│   └── 05_sql_queries.ipynb
 │
 ├── sql/
-│   └── bronze_checks.sql
-│
+│   ├──  bronze_checks.sql
+│   ├──  silver_checks.sql
+│   ├──  gold_checks.sql
 ├── docs/
 │   ├── architecture.md
-│   ├── databricks_setup.md
 │   ├── data_model.md
-│   ├── pipeline_steps.md
-│   ├── data_quality.md
-│   ├── kafka_extension.md
-│   ├── troubleshooting.md
-│   └── portfolio_notes.md
+│   ├── pipeline.md
 │
 └── assets/
-    └── architecture.png
+│   ├──  comparativa_paises.png
+│   ├──  comparativa_velocidad.png
+│   ├──  distribucion_altitud.png
+│   ├──  ultimo_estado.png
+│   ├──  workflow.png
 ```
 
 ---
@@ -307,5 +307,35 @@ Esta visualización agrupa los registros por bandas de altitud, permitiendo obse
 Esta tabla muestra el último estado registrado para cada avión, incluyendo identificador ICAO24, callsign, país de origen, coordenadas, altitud, velocidad y estado de vuelo.
 
 ![Última posición conocida de cada avión](assets/ultimo_estado.png)
+
+---
+
+## Ejecución automatizada con Databricks Workflows
+
+El pipeline completo también se puede ejecutar de forma automatizada mediante **Databricks Workflows**.
+
+El workflow orquesta las tareas principales del proyecto en orden, desde la ingesta de datos de OpenSky hasta la generación de tablas Gold y consultas analíticas.
+
+Flujo automatizado:
+
+```text
+01_ingest_opensky_raw
+        ↓
+02_bronze_from_raw_json
+        ↓
+bronze_checks
+        ↓
+03_silver_flight_states
+        ↓
+silver_checks
+        ↓
+04_gold_analytics
+        ↓
+gold_checks
+        ↓
+05_sql_queries
+
+```
+![Ejecución con Databricks Workflows](assets/workflow.png)
 
 
