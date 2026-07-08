@@ -1,4 +1,10 @@
 # SkyTracker
+ <p align="center">
+        <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white"/>
+        <img src="https://img.shields.io/badge/PySpark-E25A1C?style=flat-square&logo=apachespark&logoColor=white"/>
+        <img src="https://img.shields.io/badge/Databricks-FF3621?style=flat-square&logo=databricks&logoColor=white"/>
+        <img src="https://img.shields.io/badge/SQL-3776AB?style=flat-square&logo=sql&logoColor=white"/>
+      </p>
 
 Proyecto de **Data Engineering** basado en la API de **OpenSky Network** y desarrollado con **Python, Databricks, Spark, Delta Lake y SQL**.
 
